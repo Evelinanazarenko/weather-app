@@ -1,0 +1,74 @@
+/* .form-control {
+  text-align: left;
+} */
+.container {
+  display: block;
+  text-align: center;
+  margin: 50px auto;
+}
+
+.row {
+  justify-content: center;
+}
+
+.btn {
+  width: 100%;
+}
+
+.local {
+  background-color: rgb(17, 175, 17);
+}
+
+.weatherBox {
+  border: 1px solid #dadde1;
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+.info {
+  text-align: left;
+  color: #797979;
+  line-height: 18px;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+li {
+  list-style: none;
+  font-size: 16px;
+}
+
+ul {
+  padding: 0;
+}
+
+.tempBlock {
+  text-align: left;
+  align-items: center;
+  color: #454545;
+}
+
+img {
+  width: 64px;
+  vertical-align: bottom;
+}
+
+.tempC {
+  font-size: 50px;
+  margin: 0 10px;
+}
+
+.cf {
+  position: relative;
+  top: -24px;
+}
+
+.precip {
+  line-height: 18px;
+  color: #797979;
+  height: 55px;
+}
