@@ -39,9 +39,7 @@ function showTemp(response) {
 
 
     let descriptions = document.querySelector("#descriptions")
-    let descriptionsResult = response.data.weather[0].description;
-    descriptions.innerHTML = descriptionsResult.charAt(0).toUpperCase() + descriptions.slice(1);
-
+    descriptions.innerHTML = response.data.weather[0].description;
 
     changeTemp.innerHTML = `${temp}℃`;
 
