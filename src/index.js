@@ -107,9 +107,30 @@ function changeUnitOne(event) {
 let fareng = document.querySelector("#far")
 fareng.addEventListener("click", changeUnitOne)
 
+function showTempAgain(response) {
+    let temp = Math.round(response.data.main.temp);
+    let changeTemp = document.querySelector("#mainTemp");
+    console.log(response.data)
+
+
+    changeTemp.innerHTML = `${temp}℃`;
+
+
+}
+
 function changeUnitTwo(event) {
     event.preventDefault();
     let temp = document.querySelector("#mainTemp");
+
+    let inputResult = document.querySelector("#inputPassword");
+
+    let cityValue = inputResult.value
+
+    let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
+    let apiWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apiKey}&units=metric`;
+
+    axios.get(apiWeather).then(showTempAgain);
+
     temp.innerHTML = "19℃";
 }
 let celsium = document.querySelector("#cel")
