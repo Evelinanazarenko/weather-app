@@ -1,6 +1,6 @@
 
 
-function currentTime() {
+function currentTime(code) {
     let week = [
         "Sunday",
         "Monday",
@@ -11,22 +11,27 @@ function currentTime() {
         "Saturday"
     ];
 
-    let now = new Date();
+    let now = new Date(code * 1000);
 
     let dayWeek = week[now.getDay()];
-    let time = now.getHours();
+    let hours = now.getHours();
     let minutes = now.getMinutes();
-    let dayTime = `${dayWeek} ${time}:${minutes}`
+    if (minutes < 10) {
+        return `0${minutes}`
+    }
+    if (hours < 10) {
+        return `0${hours}`
+    }
+    let dayTime = `${dayWeek} ${hours}:${minutes}`
     return dayTime;
 }
 
 let date = document.querySelector("#date")
-date.innerHTML = currentTime();
+date.innerHTML = currentTime(1677788523);
 
 function showTemp(response) {
     let temp = Math.round(response.data.main.temp);
     let changeTemp = document.querySelector("#mainTemp");
-    console.log(response.data)
 
     let hCity = document.querySelector("#city")
     hCity.innerHTML = response.data.name;
@@ -47,6 +52,11 @@ function showTemp(response) {
     let iconId = response.data.weather[0].icon;
     iconWeather.setAttribute("src", `http://openweathermap.org/img/wn/${iconId}@2x.png`)
 
+    let timeCode = response.data.dt;
+    let date = document.querySelector("#date")
+    date.innerHTML = currentTime(timeCode);
+
+
 
 }
 
@@ -64,8 +74,7 @@ function changeCity(event) {
 
     axios.get(apiWeather).then(showTemp);
 
-    let date = document.querySelector("#date")
-    date.innerHTML = currentTime();
+
 }
 let submit = document.querySelector("#form");
 submit.addEventListener("submit", changeCity)
@@ -86,6 +95,7 @@ function changeMyLocation(response) {
     let temp = Math.round(response.data.main.temp);
     let changeTemp = document.querySelector("#mainTemp");
     changeTemp.innerHTML = `${temp}℃`;
+
 }
 
 
@@ -119,9 +129,6 @@ fareng.addEventListener("click", changeUnitOne)
 function showTempAgain(response) {
     let temp = Math.round(response.data.main.temp);
     let changeTemp = document.querySelector("#mainTemp");
-    console.log(response.data)
-
-
     changeTemp.innerHTML = `${temp}℃`;
 
 
