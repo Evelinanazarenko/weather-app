@@ -31,10 +31,16 @@
   text-align: left;
   color: #797979;
   line-height: 18px;
+  margin-left: 10px;
 }
 
 h1 {
   font-size: 22px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -46,29 +52,37 @@ ul {
   padding: 0;
 }
 
+.properties {
+  margin-left: 30px;
+}
+
 .tempBlock {
   text-align: left;
   align-items: center;
   color: #454545;
+  margin-top: 10px;
+}
+
+.col-6 {
+  display: flex;
+  align-items: center;
 }
 
 img {
-  width: 64px;
-  vertical-align: bottom;
+  width: 115px;
 }
 
 .tempC {
   font-size: 50px;
-  margin: 0 10px;
+  margin: 0 10px 0 0;
 }
 
 .cf {
   position: relative;
-  top: -24px;
+  top: -11px;
 }
 
 .precip {
   line-height: 18px;
   color: #797979;
-  height: 55px;
 }

@@ -26,6 +26,7 @@
               id="inputPassword"
               placeholder="Type a city..."
               autofocus="on"
+              value="sydney"
             />
           </div>
           <div class="col-2">
@@ -47,8 +48,9 @@
         <div class="row tempBlock">
           <div class="col-6">
             <img
-              src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+              src="http://openweathermap.org/img/wn/04n@2x.png"
               alt=""
+              id="iconWeather"
             />
             <span class="tempC" id="mainTemp">19℃</span>
             <span class="cf">
@@ -57,14 +59,11 @@
               <a href="#" id="far">℉</a>
             </span>
           </div>
-          <div class="col-6">
-            <div class="precip">
-              <ul>
-                <!-- <li>Precipitation: 0%</li> -->
-                <li id="humidity">Humidity: 77%</li>
-                <li id="wind">Wind: 8 km/h</li>
-              </ul>
-            </div>
+          <div class="col-6 precip">
+            <ul class="properties">
+              <li id="humidity">Humidity: 77%</li>
+              <li id="wind">Wind: 8 km/h</li>
+            </ul>
           </div>
         </div>
       </div>

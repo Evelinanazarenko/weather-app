@@ -43,6 +43,10 @@ function showTemp(response) {
 
     changeTemp.innerHTML = `${temp}℃`;
 
+    let iconWeather = document.querySelector("#iconWeather");
+    let iconId = response.data.weather[0].icon;
+    iconWeather.setAttribute("src", `http://openweathermap.org/img/wn/${iconId}@2x.png`)
+
 
 }
 
