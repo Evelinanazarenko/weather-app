@@ -63,6 +63,9 @@ function changeCity(event) {
     let apiWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apiKey}&units=metric`;
 
     axios.get(apiWeather).then(showTemp);
+
+    let date = document.querySelector("#date")
+    date.innerHTML = currentTime();
 }
 let submit = document.querySelector("#form");
 submit.addEventListener("submit", changeCity)
@@ -96,7 +99,9 @@ function changeLocal() {
         let weatherLocal = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
         axios.get(weatherLocal).then(changeMyLocation)
     }
-    navigator.geolocation.getCurrentPosition(getCoord)
+    navigator.geolocation.getCurrentPosition(getCoord);
+    let date = document.querySelector("#date")
+    date.innerHTML = currentTime();
 }
 
 let local = document.querySelector("#local");
