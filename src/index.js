@@ -131,7 +131,6 @@ function changeUnitTwo(event) {
 
     axios.get(apiWeather).then(showTempAgain);
 
-    temp.innerHTML = "19℃";
 }
 let celsium = document.querySelector("#cel")
 celsium.addEventListener("click", changeUnitTwo)
