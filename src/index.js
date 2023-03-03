@@ -10,7 +10,6 @@ function currentTime() {
         "Friday",
         "Saturday"
     ];
-    console.log("its working")
     let now = new Date();
 
     let dayWeek = week[now.getDay()];
@@ -90,7 +89,6 @@ function changeMyLocation(response) {
 
 
 function changeLocal() {
-
     function getCoord(position) {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
@@ -110,10 +108,10 @@ function changeUnitOne(event) {
     event.preventDefault();
     let temp = document.querySelector("#mainTemp");
 
-
     temp.innerHTML = `${Math.round((celsiumTemperature * 9 / 5) + 32)}℉`;
 
-
+    celsium.classList.remove("active");
+    fareng.classList.add("active");
 }
 
 function showTempAgain(response) {
@@ -128,6 +126,9 @@ function changeUnitTwo(event) {
     event.preventDefault();
     let celsius = document.querySelector("#mainTemp");
     celsius.innerHTML = `${Math.round(celsiumTemperature)}℃`;
+
+    fareng.classList.remove("active");
+    celsium.classList.add("active");
 }
 
 function getCityValue() {
