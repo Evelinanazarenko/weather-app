@@ -1,6 +1,6 @@
-/* .form-control {
-  text-align: left;
-} */
+.cityValue::first-letter {
+  text-transform: uppercase;
+}
 .container {
   display: block;
   text-align: center;
@@ -88,4 +88,15 @@ img {
 .precip {
   line-height: 18px;
   color: #797979;
+}
+
+.active {
+  color: #454545;
+  text-decoration: none;
+}
+
+.active:hover {
+  text-decoration: none;
+  color: #454545;
+  cursor: default;
 }

@@ -1,6 +1,6 @@
 
 
-function currentTime(code) {
+function currentTime() {
     let week = [
         "Sunday",
         "Monday",
@@ -10,24 +10,23 @@ function currentTime(code) {
         "Friday",
         "Saturday"
     ];
-
-    let now = new Date(code * 1000);
+    console.log("its working")
+    let now = new Date();
 
     let dayWeek = week[now.getDay()];
     let hours = now.getHours();
     let minutes = now.getMinutes();
     if (minutes < 10) {
-        return `0${minutes}`
+        minutes = `0${minutes}`
     }
     if (hours < 10) {
-        return `0${hours}`
+        hours = `0${hours}`
     }
-    let dayTime = `${dayWeek} ${hours}:${minutes}`
+    let dayTime = `Last updated: ${dayWeek} ${hours}:${minutes}`
     return dayTime;
+
 }
 
-let date = document.querySelector("#date")
-date.innerHTML = currentTime(1677788523);
 
 function showTemp(response) {
     let temp = Math.round(response.data.main.temp);
@@ -52,11 +51,7 @@ function showTemp(response) {
     let iconId = response.data.weather[0].icon;
     iconWeather.setAttribute("src", `http://openweathermap.org/img/wn/${iconId}@2x.png`)
 
-    let timeCode = response.data.dt;
-    let date = document.querySelector("#date")
-    date.innerHTML = currentTime(timeCode);
-
-
+    celsiumTemperature = response.data.main.temp;
 
 }
 
@@ -69,15 +64,10 @@ function changeCity(event) {
 
     let cityValue = inputResult.value
 
-    let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
-    let apiWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apiKey}&units=metric`;
 
-    axios.get(apiWeather).then(showTemp);
-
+    getDataWeather(cityValue, showTemp);
 
 }
-let submit = document.querySelector("#form");
-submit.addEventListener("submit", changeCity)
 
 function changeMyLocation(response) {
     let hCity = document.querySelector("#city")
@@ -94,7 +84,7 @@ function changeMyLocation(response) {
 
     let temp = Math.round(response.data.main.temp);
     let changeTemp = document.querySelector("#mainTemp");
-    changeTemp.innerHTML = `${temp}℃`;
+    changeTemp.innerHTML = `${temp}`;
 
 }
 
@@ -114,17 +104,17 @@ function changeLocal() {
     date.innerHTML = currentTime();
 }
 
-let local = document.querySelector("#local");
-local.addEventListener("click", changeLocal)
 
 
 function changeUnitOne(event) {
     event.preventDefault();
     let temp = document.querySelector("#mainTemp");
-    temp.innerHTML = "59℉";
+
+
+    temp.innerHTML = `${Math.round((celsiumTemperature * 9 / 5) + 32)}℉`;
+
+
 }
-let fareng = document.querySelector("#far")
-fareng.addEventListener("click", changeUnitOne)
 
 function showTempAgain(response) {
     let temp = Math.round(response.data.main.temp);
@@ -136,21 +126,42 @@ function showTempAgain(response) {
 
 function changeUnitTwo(event) {
     event.preventDefault();
-    let temp = document.querySelector("#mainTemp");
+    let celsius = document.querySelector("#mainTemp");
+    celsius.innerHTML = `${Math.round(celsiumTemperature)}℃`;
+}
 
-    let inputResult = document.querySelector("#inputPassword");
+function getCityValue() {
+    let inputValue = document.querySelector("#inputPassword")
+    let city = document.querySelector("#city");
+    city.innerHTML = inputValue.value
+    getDataWeather(inputValue.value, showTemp)
+}
 
-    let cityValue = inputResult.value
+function getDataWeather(cityValue, functionValue) {
 
     let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
     let apiWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apiKey}&units=metric`;
 
-    axios.get(apiWeather).then(showTempAgain);
-
+    axios.get(apiWeather).then(functionValue);
 }
+
+getCityValue();
+
+let date = document.querySelector("#date")
+date.innerHTML = currentTime();
+
 let celsium = document.querySelector("#cel")
 celsium.addEventListener("click", changeUnitTwo)
 
 
+let fareng = document.querySelector("#far")
+fareng.addEventListener("click", changeUnitOne)
 
+let local = document.querySelector("#local");
+local.addEventListener("click", changeLocal)
+
+let submit = document.querySelector("#form");
+submit.addEventListener("submit", changeCity)
+
+let celsiumTemperature = null;
 
