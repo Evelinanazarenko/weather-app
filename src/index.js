@@ -131,11 +131,9 @@ function changeUnitTwo(event) {
     celsium.classList.add("active");
 }
 
-function getCityValue() {
-    let inputValue = document.querySelector("#inputPassword")
-    let city = document.querySelector("#city");
-    city.innerHTML = inputValue.value
-    getDataWeather(inputValue.value, showTemp)
+function getCityValue(city) {
+
+    getDataWeather(city, showTemp)
 }
 
 function getDataWeather(cityValue, functionValue) {
@@ -146,7 +144,7 @@ function getDataWeather(cityValue, functionValue) {
     axios.get(apiWeather).then(functionValue);
 }
 
-getCityValue();
+getCityValue("Sydney");
 
 let date = document.querySelector("#date")
 date.innerHTML = currentTime();
