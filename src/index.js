@@ -52,6 +52,8 @@ function showTemp(response) {
 
     celsiumTemperature = response.data.main.temp;
 
+    getForecastApi(response.data.coord)
+
 }
 
 
@@ -165,7 +167,7 @@ submit.addEventListener("submit", changeCity)
 let celsiumTemperature = null;
 
 
-function forecast() {
+function forecast(response) {
     let forecastEl = document.querySelector("#forecast-box");
     let forecastHtml = ""
 
@@ -192,29 +194,15 @@ function forecast() {
         forecastEl.innerHTML = forecastHtml
 
     })
+    console.log(Math.round(response.data.list[0].main.temp))
 
 }
-forecast()
+// forecast()
 
+function getForecastApi(response) {
+    let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${response.lat}&lon=${response.lon}&cnt=${6}&appid=${apiKey}&units=metric`
 
+    axios.get(apiUrl).then(forecast)
 
-
-
-
-
-
-
-
-
-
-let daysWeek = [
-    "Mon",
-    "Tues",
-    "Wednes",
-    "Thurs",
-    "Fri",
-    "Sat"
-];
-
-daysWeek.forEach((day) => forecastEl.innerHTML + forecastCopy)
-
+}
