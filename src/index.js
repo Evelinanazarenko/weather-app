@@ -98,6 +98,12 @@ function changeLocal() {
         let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
         let weatherLocal = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
         axios.get(weatherLocal).then(changeMyLocation)
+
+        let apiKeyForecast = "b400ae3b711a616262d18b0ca2cbe78f";
+        let apiUrlF = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&cnt=${6}&appid=${apiKeyForecast}&units=metric`
+
+        axios.get(apiUrlF).then(forecast)
+
     }
     navigator.geolocation.getCurrentPosition(getCoord);
     let date = document.querySelector("#date")
@@ -146,11 +152,11 @@ function getDataWeather(cityValue, functionValue) {
     axios.get(apiWeather).then(functionValue);
 }
 
-function forecast(response) {
-    let forecastEl = document.querySelector("#forecast-box");
-    let forecastHtml = ""
-
+function formatDay(code) {
+    let now = new Date(code * 1000)
+    let dayNumber = now.getDay()
     let daysWeek = [
+        "Sun",
         "Mon",
         "Tue",
         "Wed",
@@ -158,29 +164,42 @@ function forecast(response) {
         "Fri",
         "Sat"
     ];
-    daysWeek.forEach((day) => {
-        forecastHtml = forecastHtml + `<div class="col-2 forecast-one-day">
-        ${day}
+
+    return daysWeek[dayNumber]
+
+}
+
+
+function forecast(response) {
+    let forecastEl = document.querySelector("#forecast-box");
+    let forecastHtml = ""
+    let daysArray = response.data.daily
+
+
+    daysArray.forEach((el, index) => {
+        if (index < 6) {
+            forecastHtml = forecastHtml + `<div class="col-2 forecast-one-day">
+        ${formatDay(el.dt)}
         <img
-          src="http://openweathermap.org/img/wn/04n@2x.png"
+          src="http://openweathermap.org/img/wn/${el.weather[0].icon}@2x.png"
           alt=""
           width="60px"
         />
-        <span>25℃</span>
-        <span class="forecast-min-tem">10℃</span>
+        <span>${Math.round(el.temp.max)} | </span>
+        <span class="forecast-min-tem">${Math.round(el.temp.min)}℃</span>
         </div>`
 
-        forecastEl.innerHTML = forecastHtml
-
+            forecastEl.innerHTML = forecastHtml
+        }
     })
-    console.log(Math.round(response.data.list[0].main.temp))
+
 
 }
 
 
 function getForecastApi(response) {
     let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${response.lat}&lon=${response.lon}&cnt=${6}&appid=${apiKey}&units=metric`
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.lat}&lon=${response.lon}&cnt=${6}&appid=${apiKey}&units=metric`
 
     axios.get(apiUrl).then(forecast)
 
