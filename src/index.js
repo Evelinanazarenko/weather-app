@@ -146,27 +146,6 @@ function getDataWeather(cityValue, functionValue) {
     axios.get(apiWeather).then(functionValue);
 }
 
-getCityValue("Sydney");
-
-let date = document.querySelector("#date")
-date.innerHTML = currentTime();
-
-let celsium = document.querySelector("#cel")
-celsium.addEventListener("click", changeUnitTwo)
-
-
-let fareng = document.querySelector("#far")
-fareng.addEventListener("click", changeUnitOne)
-
-let local = document.querySelector("#local");
-local.addEventListener("click", changeLocal)
-
-let submit = document.querySelector("#form");
-submit.addEventListener("submit", changeCity)
-
-let celsiumTemperature = null;
-
-
 function forecast(response) {
     let forecastEl = document.querySelector("#forecast-box");
     let forecastHtml = ""
@@ -197,7 +176,7 @@ function forecast(response) {
     console.log(Math.round(response.data.list[0].main.temp))
 
 }
-// forecast()
+
 
 function getForecastApi(response) {
     let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
@@ -206,3 +185,24 @@ function getForecastApi(response) {
     axios.get(apiUrl).then(forecast)
 
 }
+
+let date = document.querySelector("#date")
+date.innerHTML = currentTime();
+
+let celsium = document.querySelector("#cel")
+celsium.addEventListener("click", changeUnitTwo)
+
+
+let fareng = document.querySelector("#far")
+fareng.addEventListener("click", changeUnitOne)
+
+let local = document.querySelector("#local");
+local.addEventListener("click", changeLocal)
+
+let submit = document.querySelector("#form");
+submit.addEventListener("submit", changeCity)
+
+let celsiumTemperature = null;
+
+getCityValue("Sydney");
+
