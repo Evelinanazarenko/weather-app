@@ -164,3 +164,57 @@ submit.addEventListener("submit", changeCity)
 
 let celsiumTemperature = null;
 
+
+function forecast() {
+    let forecastEl = document.querySelector("#forecast-box");
+    let forecastHtml = ""
+
+    let daysWeek = [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+    ];
+    daysWeek.forEach((day) => {
+        forecastHtml = forecastHtml + `<div class="col-2 forecast-one-day">
+        ${day}
+        <img
+          src="http://openweathermap.org/img/wn/04n@2x.png"
+          alt=""
+          width="60px"
+        />
+        <span>25℃</span>
+        <span class="forecast-min-tem">10℃</span>
+        </div>`
+
+        forecastEl.innerHTML = forecastHtml
+
+    })
+
+}
+forecast()
+
+
+
+
+
+
+
+
+
+
+
+
+let daysWeek = [
+    "Mon",
+    "Tues",
+    "Wednes",
+    "Thurs",
+    "Fri",
+    "Sat"
+];
+
+daysWeek.forEach((day) => forecastEl.innerHTML + forecastCopy)
+

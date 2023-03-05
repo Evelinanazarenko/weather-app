@@ -71,7 +71,7 @@ ul {
   align-items: center;
 }
 
-img {
+img .mainIcon {
   width: 115px;
 }
 
@@ -99,4 +99,17 @@ img {
   text-decoration: none;
   color: #454545;
   cursor: default;
+}
+
+.forecast-box {
+  margin-top: 20px;
+}
+
+.forecast-one-day {
+  text-align: center;
+  font-size: 15px;
+}
+
+.forecast-min-tem {
+  opacity: 80%;
 }
